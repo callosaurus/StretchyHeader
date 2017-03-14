@@ -9,16 +9,30 @@
 import UIKit
 import CoreData
 
-class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class MasterViewController: UITableViewController {
+    
+    let items = [
+        NewsItem(category: .World, summary: "Kim Jong-un threatens ‘MERCILESS’ attack on America in retaliation for South Korea drills."),
+        NewsItem(category: .Europe, summary: "Pilot dies after Irish coastguard crash"),
+        NewsItem(category: .MiddleEast, summary: "Syria jets deliberately bombed spring - UN"),
+        NewsItem(category: .Africa, summary: "Kenya doctors end 100-day strike"),
+        NewsItem(category: .AsiaPacific, summary: "Rhino horns worth $5m seized in Thailand"),
+        NewsItem(category: .Americas, summary: "Top US Marine vows action on nude photos"),
+        NewsItem(category: .World, summary: "Google balloon mistaken for UFO as it crashes in Colombia"),
+        NewsItem(category: .Europe, summary: "Poland says Minnesota man was Nazi commander")
+    ]
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 65
-        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 65
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -40,14 +54,14 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return items.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! CustomCell
-        cell.categoryLabel.text = "World"
-        cell.headlineLabel.text = "Climate change protests, divestment meets fossil fuel realities"
-        cell.headlineLabel.numberOfLines = 0;
+        let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsItemCell
+        let item = items[indexPath.row]
+        cell.newsItem = item
+        cell.headlineLabel.numberOfLines = 0
         return cell
     }
 
@@ -59,16 +73,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
     }
-
-
-    /*
-     // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
-     
-     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-         // In the simplest, most efficient, case, reload the table view.
-         self.tableView.reloadData()
-     }
-     */
 
 }
 
