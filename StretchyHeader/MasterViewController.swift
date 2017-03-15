@@ -9,9 +9,13 @@
 import UIKit
 import CoreData
 
+private let kTableHeaderHeight: CGFloat = 267.0
+
 class MasterViewController: UITableViewController {
     
+    @IBOutlet weak var header: UIView!
     @IBOutlet weak var dateLabel: UILabel!
+    var headerView: UIView!
     
     let items = [
         NewsItem(category: .World, summary: "Kim Jong-un threatens ‘MERCILESS’ attack on America in retaliation for South Korea drills."),
@@ -39,6 +43,14 @@ class MasterViewController: UITableViewController {
         formatter.dateFormat = "dd.MM"
         let dateString = formatter.string(from: date)
         self.dateLabel.text = dateString
+        
+        headerView = tableView .tableHeaderView
+        tableView.tableHeaderView = nil
+        tableView.addSubview(headerView)
+        
+        tableView.contentInset = UIEdgeInsets(top:kTableHeaderHeight, left: 0, bottom: 0, right: 0)
+        tableView.contentOffset = CGPoint(x: 0, y: -kTableHeaderHeight)
+        updateHeaderView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,6 +92,21 @@ class MasterViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        updateHeaderView()
+    }
+    
+    func updateHeaderView() -> Void {
+        
+        //set the frame of our headerview as the table view scrolls
+        var headerRect = CGRect(x: 0, y: -kTableHeaderHeight, width: tableView.bounds.width, height: kTableHeaderHeight)
+        if tableView.contentOffset.y < -kTableHeaderHeight {
+            headerRect.origin.y = tableView.contentOffset.y
+            headerRect.size.height = -tableView.contentOffset.y
+        }
+        header.frame = headerRect
     }
 
 }

@@ -22,9 +22,8 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="267"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg-header" translatesAutoresizingMaskIntoConstraints="NO" id="tWt-ow-obQ">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-header" translatesAutoresizingMaskIntoConstraints="NO" id="tWt-ow-obQ">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="267"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FjQ-c4-xxO">
                                     <rect key="frame" x="8" y="8" width="107" height="21"/>
@@ -35,6 +34,12 @@
                                 </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="tWt-ow-obQ" firstAttribute="leading" secondItem="VtQ-BR-hwK" secondAttribute="leading" id="Gou-Ud-eCb"/>
+                                <constraint firstAttribute="trailing" secondItem="tWt-ow-obQ" secondAttribute="trailing" id="Thh-vF-qZ2"/>
+                                <constraint firstItem="tWt-ow-obQ" firstAttribute="top" secondItem="VtQ-BR-hwK" secondAttribute="top" id="XAa-lS-Wig"/>
+                                <constraint firstAttribute="bottom" secondItem="tWt-ow-obQ" secondAttribute="bottom" id="agS-6n-Rgo"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newsCell" rowHeight="65" id="WCw-Qf-5nD" customClass="NewsItemCell" customModule="StretchyHeader" customModuleProvider="target">
@@ -83,6 +88,7 @@
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8"/>
                     <connections>
                         <outlet property="dateLabel" destination="FjQ-c4-xxO" id="UL5-G1-RaC"/>
+                        <outlet property="header" destination="VtQ-BR-hwK" id="CdQ-vC-EaH"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
