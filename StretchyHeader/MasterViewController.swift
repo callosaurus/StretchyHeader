@@ -11,6 +11,8 @@ import CoreData
 
 class MasterViewController: UITableViewController {
     
+    @IBOutlet weak var dateLabel: UILabel!
+    
     let items = [
         NewsItem(category: .World, summary: "Kim Jong-un threatens ‘MERCILESS’ attack on America in retaliation for South Korea drills."),
         NewsItem(category: .Europe, summary: "Pilot dies after Irish coastguard crash"),
@@ -31,6 +33,12 @@ class MasterViewController: UITableViewController {
 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 65
+        
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM"
+        let dateString = formatter.string(from: date)
+        self.dateLabel.text = dateString
     }
     
     override func viewWillAppear(_ animated: Bool) {
